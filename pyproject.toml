@@ -3,6 +3,8 @@ name = "xcapi"
 version = "1.0.0"
 description = "Python library for communicating with the xray grpc api"
 authors = ["AcerPlatanoides.L <AcerPlatanoides.L@proton.me>"]
+license = "MIT"
+repository = "https://github.com/Acer-Platanoides/xcapi"
 readme = "README.md"
 
 [tool.poetry.dependencies]
