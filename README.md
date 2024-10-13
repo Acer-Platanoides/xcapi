@@ -10,7 +10,7 @@ Use python 3.12
 
 ## Install
 ```bash
-pip install scapi
+pip install xcapi
 ```
 ## Usage
 [Example](https://github.com/Acer-Platanoides/xcapi/tree/main/test)
