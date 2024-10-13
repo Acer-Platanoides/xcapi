@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package xray.transport.internet.tcp;
+import "xcapi/xray/common/serial/typed_message.proto";
+
+message Config {
+  reserved 1;
+  xray.common.serial.TypedMessage header_settings = 2;
+  bool accept_proxy_protocol = 3;
+}

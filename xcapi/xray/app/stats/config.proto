@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package xray.app.stats;
+
+
+message Config {}
+
+message ChannelConfig {
+  bool Blocking = 1;
+  int32 SubscriberLimit = 2;
+  int32 BufferSize = 3;
+}

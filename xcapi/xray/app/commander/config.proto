@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package xray.app.commander;
+import "xcapi/xray/common/serial/typed_message.proto";
+
+// Config is the settings for Commander.
+message Config {
+  // Tag of the outbound handler that handles grpc connections.
+  string tag = 1;
+
+  // Network address of commander grpc service.
+  string listen = 3;
+
+  // Services that supported by this server. All services must implement Service
+  // interface.
+  repeated xray.common.serial.TypedMessage service = 2;
+}
+
+// ReflectionConfig is the placeholder config for ReflectionService.
+message ReflectionConfig {}

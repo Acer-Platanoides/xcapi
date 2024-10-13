@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package xray.proxy.dokodemo;
+import "xcapi/xray/common/net/address.proto";
+import "xcapi/xray/common/net/network.proto";
+
+message Config {
+  xray.common.net.IPOrDomain address = 1;
+  uint32 port = 2;
+
+  // List of networks that the Dokodemo accepts.
+  repeated xray.common.net.Network networks = 7;
+
+  bool follow_redirect = 5;
+  uint32 user_level = 6;
+}

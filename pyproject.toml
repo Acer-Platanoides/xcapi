@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "xcapi"
+version = "1.0.0"
+description = "Python library for communicating with the xray grpc api"
+authors = ["AcerPlatanoides.L <AcerPlatanoides.L@proton.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+grpcio = "^1.66.2"
+grpcio-tools = "^1.66.2"
+pydantic = "^2.9.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

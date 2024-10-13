@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package xray.proxy.loopback;
+
+message Config {
+  string inbound_tag = 1;
+}

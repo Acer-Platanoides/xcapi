@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package xray.transport.internet.headers.noop;
+
+message Config {}
+
+message ConnectionConfig {}

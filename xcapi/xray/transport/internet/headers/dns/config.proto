@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package xray.transport.internet.headers.dns;
+
+message Config {
+    string domain = 1;
+}
+

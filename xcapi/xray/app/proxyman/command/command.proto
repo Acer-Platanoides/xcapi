@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package xray.app.proxyman.command;
+
+import "xcapi/xray/common/protocol/user.proto";
+import "xcapi/xray/common/serial/typed_message.proto";
+import "xcapi/xray/core/config.proto";
+
+message AddUserOperation {
+  xray.common.protocol.User user = 1;
+}
+
+message RemoveUserOperation {
+  string email = 1;
+}
+
+message AddInboundRequest {
+  core.InboundHandlerConfig inbound = 1;
+}
+
+message AddInboundResponse {}
+
+message RemoveInboundRequest {
+  string tag = 1;
+}
+
+message RemoveInboundResponse {}
+
+message AlterInboundRequest {
+  string tag = 1;
+  xray.common.serial.TypedMessage operation = 2;
+}
+
+message AlterInboundResponse {}
+
+message AddOutboundRequest {
+  core.OutboundHandlerConfig outbound = 1;
+}
+
+message AddOutboundResponse {}
+
+message RemoveOutboundRequest {
+  string tag = 1;
+}
+
+message RemoveOutboundResponse {}
+
+message AlterOutboundRequest {
+  string tag = 1;
+  xray.common.serial.TypedMessage operation = 2;
+}
+
+message AlterOutboundResponse {}
+
+service HandlerService {
+  rpc AddInbound(AddInboundRequest) returns (AddInboundResponse) {}
+
+  rpc RemoveInbound(RemoveInboundRequest) returns (RemoveInboundResponse) {}
+
+  rpc AlterInbound(AlterInboundRequest) returns (AlterInboundResponse) {}
+
+  rpc AddOutbound(AddOutboundRequest) returns (AddOutboundResponse) {}
+
+  rpc RemoveOutbound(RemoveOutboundRequest) returns (RemoveOutboundResponse) {}
+
+  rpc AlterOutbound(AlterOutboundRequest) returns (AlterOutboundResponse) {}
+}
+
+message Config {}

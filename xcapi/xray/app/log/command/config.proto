@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package xray.app.log.command;
+
+message Config {}
+
+message RestartLoggerRequest {}
+
+message RestartLoggerResponse {}
+
+service LoggerService {
+  rpc RestartLogger(RestartLoggerRequest) returns (RestartLoggerResponse) {}
+}

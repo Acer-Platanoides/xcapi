@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package xray.proxy.vmess.outbound;
+
+import "xcapi/xray/common/protocol/server_spec.proto";
+
+message Config {
+  repeated xray.common.protocol.ServerEndpoint Receiver = 1;
+}

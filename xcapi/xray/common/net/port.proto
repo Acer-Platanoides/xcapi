@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package xray.common.net;
+
+// PortRange represents a range of ports.
+message PortRange {
+  // The port that this range starts from.
+  uint32 From = 1;
+  // The port that this range ends with (inclusive).
+  uint32 To = 2;
+}
+
+// PortList is a list of ports.
+message PortList {
+  repeated PortRange range = 1;
+}

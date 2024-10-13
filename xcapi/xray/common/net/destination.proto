@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package xray.common.net;
+import "xcapi/xray/common/net/network.proto";
+import "xcapi/xray/common/net/address.proto";
+
+// Endpoint of a network connection.
+message Endpoint {
+  Network network = 1;
+  IPOrDomain address = 2;
+  uint32 port = 3;
+}

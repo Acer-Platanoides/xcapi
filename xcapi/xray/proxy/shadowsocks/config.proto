@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package xray.proxy.shadowsocks;
+
+import "xcapi/xray/common/net/network.proto";
+import "xcapi/xray/common/protocol/user.proto";
+import "xcapi/xray/common/protocol/server_spec.proto";
+
+message Account {
+  string password = 1;
+  CipherType cipher_type = 2;
+
+  bool iv_check = 3;
+}
+
+enum CipherType {
+  UNKNOWN = 0;
+  AES_128_GCM = 5;
+  AES_256_GCM = 6;
+  CHACHA20_POLY1305 = 7;
+  XCHACHA20_POLY1305 = 8;
+  NONE = 9;
+}
+
+message ServerConfig {
+  repeated xray.common.protocol.User users = 1;
+  repeated xray.common.net.Network network = 2;
+}
+
+message ClientConfig {
+  repeated xray.common.protocol.ServerEndpoint server = 1;
+}

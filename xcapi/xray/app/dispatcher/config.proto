@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package xray.app.dispatcher;
+
+message SessionConfig {
+  reserved 1;
+}
+
+message Config {
+  SessionConfig settings = 1;
+}

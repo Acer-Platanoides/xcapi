@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package xray.transport.internet.websocket;
+
+message Config {
+  string host = 1;
+  string path = 2; // URL path to the WebSocket service. Empty value means root(/).
+  map<string, string> header = 3;
+  bool accept_proxy_protocol = 4;
+  uint32 ed = 5;
+}

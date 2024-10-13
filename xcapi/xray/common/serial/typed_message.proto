@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package xray.common.serial;
+
+// TypedMessage is a serialized proto message along with its type name.
+message TypedMessage {
+  // The name of the message type, retrieved from protobuf API.
+  string type = 1;
+  // Serialized proto message.
+  bytes value = 2;
+}

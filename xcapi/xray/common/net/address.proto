@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package xray.common.net;
+
+// Address of a network host. It may be either an IP address or a domain
+// address.
+message IPOrDomain {
+  oneof address {
+    // IP address. Must by either 4 or 16 bytes.
+    bytes ip = 1;
+
+    // Domain address.
+    string domain = 2;
+  }
+}

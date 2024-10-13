@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package xray.proxy.blackhole;
+
+import "xcapi/xray/common/serial/typed_message.proto";
+
+message NoneResponse {}
+
+message HTTPResponse {}
+
+message Config {
+  xray.common.serial.TypedMessage response = 1;
+}
