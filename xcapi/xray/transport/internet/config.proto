@@ -3,6 +3,7 @@ syntax = "proto3";
 package xray.transport.internet;
 
 import "xcapi/xray/common/serial/typed_message.proto";
+import "xcapi/xray/common/net/address.proto";
 
 enum DomainStrategy {
   AS_IS = 0;
@@ -27,6 +28,9 @@ message TransportConfig {
 }
 
 message StreamConfig {
+  xray.common.net.IPOrDomain address = 8;
+  uint32 port = 9;
+
   // Effective network.
   string protocol_name = 5;
 

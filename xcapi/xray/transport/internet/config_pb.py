@@ -12,6 +12,7 @@ from enum import Enum
 from xcapi.xray.common.serial.typed_message_pb import TypedMessage
 from xcapi.model import ClassMeta
 from dataclasses import dataclass
+from xcapi.xray.common.net.address_pb import IPOrDomain
 
 
 class DomainStrategy(Enum):
@@ -91,6 +92,8 @@ class SocketConfig(ClassMeta):
 @dataclass
 class StreamConfig(ClassMeta):
     """Effective network."""
+    address: Optional[IPOrDomain] = None
+    port: Optional[int] = None
     protocol_name: Optional[str] = None
     transport_settings: Optional[List[TransportConfig]] = None
     security_type: Optional[str] = None
@@ -103,24 +106,24 @@ class StreamConfig(ClassMeta):
 _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n*xcapi/xray/transport/internet/config.proto\x12\x17xray.transport.internet\x1a,xcapi/xray/common/serial/typed_message.proto\"\\\n\x0fTransportConfig\x12\x15\n\rprotocol_name\x18\x03 \x01(\t\x12\x32\n\x08settings\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\xff\x01\n\x0cStreamConfig\x12\x15\n\rprotocol_name\x18\x05 \x01(\t\x12\x44\n\x12transport_settings\x18\x02 \x03(\x0b\x32(.xray.transport.internet.TransportConfig\x12\x15\n\rsecurity_type\x18\x03 \x01(\t\x12;\n\x11security_settings\x18\x04 \x03(\x0b\x32 .xray.common.serial.TypedMessage\x12>\n\x0fsocket_settings\x18\x06 \x01(\x0b\x32%.xray.transport.internet.SocketConfig\"7\n\x0bProxyConfig\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x1b\n\x13transportLayerProxy\x18\x02 \x01(\x08\"H\n\rCustomSockopt\x12\r\n\x05level\x18\x01 \x01(\t\x12\x0b\n\x03opt\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\"\x8d\x05\n\x0cSocketConfig\x12\x0c\n\x04mark\x18\x01 \x01(\x05\x12\x0b\n\x03tfo\x18\x02 \x01(\x05\x12@\n\x06tproxy\x18\x03 \x01(\x0e\x32\x30.xray.transport.internet.SocketConfig.TProxyMode\x12%\n\x1dreceive_original_dest_address\x18\x04 \x01(\x08\x12\x14\n\x0c\x62ind_address\x18\x05 \x01(\x0c\x12\x11\n\tbind_port\x18\x06 \x01(\r\x12\x1d\n\x15\x61\x63\x63\x65pt_proxy_protocol\x18\x07 \x01(\x08\x12@\n\x0f\x64omain_strategy\x18\x08 \x01(\x0e\x32\'.xray.transport.internet.DomainStrategy\x12\x14\n\x0c\x64ialer_proxy\x18\t \x01(\t\x12\x1f\n\x17tcp_keep_alive_interval\x18\n \x01(\x05\x12\x1b\n\x13tcp_keep_alive_idle\x18\x0b \x01(\x05\x12\x16\n\x0etcp_congestion\x18\x0c \x01(\t\x12\x11\n\tinterface\x18\r \x01(\t\x12\x0e\n\x06v6only\x18\x0e \x01(\x08\x12\x18\n\x10tcp_window_clamp\x18\x0f \x01(\x05\x12\x18\n\x10tcp_user_timeout\x18\x10 \x01(\x05\x12\x13\n\x0btcp_max_seg\x18\x11 \x01(\x05\x12\x14\n\x0ctcp_no_delay\x18\x12 \x01(\x08\x12\x11\n\ttcp_mptcp\x18\x13 \x01(\x08\x12=\n\rcustomSockopt\x18\x14 \x03(\x0b\x32&.xray.transport.internet.CustomSockopt\"/\n\nTProxyMode\x12\x07\n\x03Off\x10\x00\x12\n\n\x06TProxy\x10\x01\x12\x0c\n\x08Redirect\x10\x02*\xa9\x01\n\x0e\x44omainStrategy\x12\t\n\x05\x41S_IS\x10\x00\x12\n\n\x06USE_IP\x10\x01\x12\x0b\n\x07USE_IP4\x10\x02\x12\x0b\n\x07USE_IP6\x10\x03\x12\x0c\n\x08USE_IP46\x10\x04\x12\x0c\n\x08USE_IP64\x10\x05\x12\x0c\n\x08\x46ORCE_IP\x10\x06\x12\r\n\tFORCE_IP4\x10\x07\x12\r\n\tFORCE_IP6\x10\x08\x12\x0e\n\nFORCE_IP46\x10\t\x12\x0e\n\nFORCE_IP64\x10\nb\x06proto3')
+    b'\n*xcapi/xray/transport/internet/config.proto\x12\x17xray.transport.internet\x1a,xcapi/xray/common/serial/typed_message.proto\x1a#xcapi/xray/common/net/address.proto\"\\\n\x0fTransportConfig\x12\x15\n\rprotocol_name\x18\x03 \x01(\t\x12\x32\n\x08settings\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\xbb\x02\n\x0cStreamConfig\x12,\n\x07\x61\x64\x64ress\x18\x08 \x01(\x0b\x32\x1b.xray.common.net.IPOrDomain\x12\x0c\n\x04port\x18\t \x01(\r\x12\x15\n\rprotocol_name\x18\x05 \x01(\t\x12\x44\n\x12transport_settings\x18\x02 \x03(\x0b\x32(.xray.transport.internet.TransportConfig\x12\x15\n\rsecurity_type\x18\x03 \x01(\t\x12;\n\x11security_settings\x18\x04 \x03(\x0b\x32 .xray.common.serial.TypedMessage\x12>\n\x0fsocket_settings\x18\x06 \x01(\x0b\x32%.xray.transport.internet.SocketConfig\"7\n\x0bProxyConfig\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x1b\n\x13transportLayerProxy\x18\x02 \x01(\x08\"H\n\rCustomSockopt\x12\r\n\x05level\x18\x01 \x01(\t\x12\x0b\n\x03opt\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\"\x8d\x05\n\x0cSocketConfig\x12\x0c\n\x04mark\x18\x01 \x01(\x05\x12\x0b\n\x03tfo\x18\x02 \x01(\x05\x12@\n\x06tproxy\x18\x03 \x01(\x0e\x32\x30.xray.transport.internet.SocketConfig.TProxyMode\x12%\n\x1dreceive_original_dest_address\x18\x04 \x01(\x08\x12\x14\n\x0c\x62ind_address\x18\x05 \x01(\x0c\x12\x11\n\tbind_port\x18\x06 \x01(\r\x12\x1d\n\x15\x61\x63\x63\x65pt_proxy_protocol\x18\x07 \x01(\x08\x12@\n\x0f\x64omain_strategy\x18\x08 \x01(\x0e\x32\'.xray.transport.internet.DomainStrategy\x12\x14\n\x0c\x64ialer_proxy\x18\t \x01(\t\x12\x1f\n\x17tcp_keep_alive_interval\x18\n \x01(\x05\x12\x1b\n\x13tcp_keep_alive_idle\x18\x0b \x01(\x05\x12\x16\n\x0etcp_congestion\x18\x0c \x01(\t\x12\x11\n\tinterface\x18\r \x01(\t\x12\x0e\n\x06v6only\x18\x0e \x01(\x08\x12\x18\n\x10tcp_window_clamp\x18\x0f \x01(\x05\x12\x18\n\x10tcp_user_timeout\x18\x10 \x01(\x05\x12\x13\n\x0btcp_max_seg\x18\x11 \x01(\x05\x12\x14\n\x0ctcp_no_delay\x18\x12 \x01(\x08\x12\x11\n\ttcp_mptcp\x18\x13 \x01(\x08\x12=\n\rcustomSockopt\x18\x14 \x03(\x0b\x32&.xray.transport.internet.CustomSockopt\"/\n\nTProxyMode\x12\x07\n\x03Off\x10\x00\x12\n\n\x06TProxy\x10\x01\x12\x0c\n\x08Redirect\x10\x02*\xa9\x01\n\x0e\x44omainStrategy\x12\t\n\x05\x41S_IS\x10\x00\x12\n\n\x06USE_IP\x10\x01\x12\x0b\n\x07USE_IP4\x10\x02\x12\x0b\n\x07USE_IP6\x10\x03\x12\x0c\n\x08USE_IP46\x10\x04\x12\x0c\n\x08USE_IP64\x10\x05\x12\x0c\n\x08\x46ORCE_IP\x10\x06\x12\r\n\tFORCE_IP4\x10\x07\x12\r\n\tFORCE_IP6\x10\x08\x12\x0e\n\nFORCE_IP46\x10\t\x12\x0e\n\nFORCE_IP64\x10\nb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'xcapi.xray.transport.internet.config_pb', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
     DESCRIPTOR._loaded_options = None
-    _globals['_DOMAINSTRATEGY']._serialized_start = 1257
-    _globals['_DOMAINSTRATEGY']._serialized_end = 1426
-    _globals['_TRANSPORTCONFIG']._serialized_start = 117
-    _globals['_TRANSPORTCONFIG']._serialized_end = 209
-    _globals['_STREAMCONFIG']._serialized_start = 212
-    _globals['_STREAMCONFIG']._serialized_end = 467
-    _globals['_PROXYCONFIG']._serialized_start = 469
-    _globals['_PROXYCONFIG']._serialized_end = 524
-    _globals['_CUSTOMSOCKOPT']._serialized_start = 526
-    _globals['_CUSTOMSOCKOPT']._serialized_end = 598
-    _globals['_SOCKETCONFIG']._serialized_start = 601
-    _globals['_SOCKETCONFIG']._serialized_end = 1254
-    _globals['_SOCKETCONFIG_TPROXYMODE']._serialized_start = 1207
-    _globals['_SOCKETCONFIG_TPROXYMODE']._serialized_end = 1254
+    _globals['_DOMAINSTRATEGY']._serialized_start = 1354
+    _globals['_DOMAINSTRATEGY']._serialized_end = 1523
+    _globals['_TRANSPORTCONFIG']._serialized_start = 154
+    _globals['_TRANSPORTCONFIG']._serialized_end = 246
+    _globals['_STREAMCONFIG']._serialized_start = 249
+    _globals['_STREAMCONFIG']._serialized_end = 564
+    _globals['_PROXYCONFIG']._serialized_start = 566
+    _globals['_PROXYCONFIG']._serialized_end = 621
+    _globals['_CUSTOMSOCKOPT']._serialized_start = 623
+    _globals['_CUSTOMSOCKOPT']._serialized_end = 695
+    _globals['_SOCKETCONFIG']._serialized_start = 698
+    _globals['_SOCKETCONFIG']._serialized_end = 1351
+    _globals['_SOCKETCONFIG_TPROXYMODE']._serialized_start = 1304
+    _globals['_SOCKETCONFIG_TPROXYMODE']._serialized_end = 1351

@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package xray.transport.internet.splithttp;
+import "xcapi/xray/transport/internet/config.proto";
 
 message Config {
   string host = 1;
@@ -12,6 +13,7 @@ message Config {
   bool noSSEHeader = 7;
   RandRangeConfig xPaddingBytes = 8;
   Multiplexing xmux = 9;
+  xray.transport.internet.StreamConfig downloadSettings = 10;
 }
 
 message RandRangeConfig {
