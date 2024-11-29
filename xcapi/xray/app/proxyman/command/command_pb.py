@@ -11,7 +11,7 @@ from xcapi.xray.common.protocol.user_pb import User
 from xcapi.xray.core.config_pb import InboundHandlerConfig, OutboundHandlerConfig
 from xcapi.xray.common.serial.typed_message_pb import TypedMessage
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 from xcapi.model import ClassMeta
 
 
@@ -87,10 +87,26 @@ class AlterOutboundResponse(ClassMeta):
     pass
 
 
+@dataclass
+class GetInboundUserRequest(ClassMeta):
+    tag: Optional[str] = None
+    email: Optional[str] = None
+
+
+@dataclass
+class GetInboundUserResponse(ClassMeta):
+    users: Optional[List[User]] = None
+
+
+@dataclass
+class GetInboundUsersCountResponse(ClassMeta):
+    count: Optional[int] = None
+
+
 _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n-xcapi/xray/app/proxyman/command/command.proto\x12\x19xray.app.proxyman.command\x1a%xcapi/xray/common/protocol/user.proto\x1a,xcapi/xray/common/serial/typed_message.proto\x1a\x1cxcapi/xray/core/config.proto\"<\n\x10\x41\x64\x64UserOperation\x12(\n\x04user\x18\x01 \x01(\x0b\x32\x1a.xray.common.protocol.User\"$\n\x13RemoveUserOperation\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"E\n\x11\x41\x64\x64InboundRequest\x12\x30\n\x07inbound\x18\x01 \x01(\x0b\x32\x1f.xray.core.InboundHandlerConfig\"\x14\n\x12\x41\x64\x64InboundResponse\"#\n\x14RemoveInboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\"\x17\n\x15RemoveInboundResponse\"W\n\x13\x41lterInboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x33\n\toperation\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\x16\n\x14\x41lterInboundResponse\"H\n\x12\x41\x64\x64OutboundRequest\x12\x32\n\x08outbound\x18\x01 \x01(\x0b\x32 .xray.core.OutboundHandlerConfig\"\x15\n\x13\x41\x64\x64OutboundResponse\"$\n\x15RemoveOutboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\"\x18\n\x16RemoveOutboundResponse\"X\n\x14\x41lterOutboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x33\n\toperation\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\x17\n\x15\x41lterOutboundResponse\"\x08\n\x06\x43onfig2\xc5\x05\n\x0eHandlerService\x12k\n\nAddInbound\x12,.xray.app.proxyman.command.AddInboundRequest\x1a-.xray.app.proxyman.command.AddInboundResponse\"\x00\x12t\n\rRemoveInbound\x12/.xray.app.proxyman.command.RemoveInboundRequest\x1a\x30.xray.app.proxyman.command.RemoveInboundResponse\"\x00\x12q\n\x0c\x41lterInbound\x12..xray.app.proxyman.command.AlterInboundRequest\x1a/.xray.app.proxyman.command.AlterInboundResponse\"\x00\x12n\n\x0b\x41\x64\x64Outbound\x12-.xray.app.proxyman.command.AddOutboundRequest\x1a..xray.app.proxyman.command.AddOutboundResponse\"\x00\x12w\n\x0eRemoveOutbound\x12\x30.xray.app.proxyman.command.RemoveOutboundRequest\x1a\x31.xray.app.proxyman.command.RemoveOutboundResponse\"\x00\x12t\n\rAlterOutbound\x12/.xray.app.proxyman.command.AlterOutboundRequest\x1a\x30.xray.app.proxyman.command.AlterOutboundResponse\"\x00\x62\x06proto3')
+    b'\n-xcapi/xray/app/proxyman/command/command.proto\x12\x19xray.app.proxyman.command\x1a%xcapi/xray/common/protocol/user.proto\x1a,xcapi/xray/common/serial/typed_message.proto\x1a\x1cxcapi/xray/core/config.proto\"<\n\x10\x41\x64\x64UserOperation\x12(\n\x04user\x18\x01 \x01(\x0b\x32\x1a.xray.common.protocol.User\"$\n\x13RemoveUserOperation\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"E\n\x11\x41\x64\x64InboundRequest\x12\x30\n\x07inbound\x18\x01 \x01(\x0b\x32\x1f.xray.core.InboundHandlerConfig\"\x14\n\x12\x41\x64\x64InboundResponse\"#\n\x14RemoveInboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\"\x17\n\x15RemoveInboundResponse\"W\n\x13\x41lterInboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x33\n\toperation\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\x16\n\x14\x41lterInboundResponse\"3\n\x15GetInboundUserRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"C\n\x16GetInboundUserResponse\x12)\n\x05users\x18\x01 \x03(\x0b\x32\x1a.xray.common.protocol.User\"-\n\x1cGetInboundUsersCountResponse\x12\r\n\x05\x63ount\x18\x01 \x01(\x03\"H\n\x12\x41\x64\x64OutboundRequest\x12\x32\n\x08outbound\x18\x01 \x01(\x0b\x32 .xray.core.OutboundHandlerConfig\"\x15\n\x13\x41\x64\x64OutboundResponse\"$\n\x15RemoveOutboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\"\x18\n\x16RemoveOutboundResponse\"X\n\x14\x41lterOutboundRequest\x12\x0b\n\x03tag\x18\x01 \x01(\t\x12\x33\n\toperation\x18\x02 \x01(\x0b\x32 .xray.common.serial.TypedMessage\"\x17\n\x15\x41lterOutboundResponse\"\x08\n\x06\x43onfig2\xc5\x07\n\x0eHandlerService\x12k\n\nAddInbound\x12,.xray.app.proxyman.command.AddInboundRequest\x1a-.xray.app.proxyman.command.AddInboundResponse\"\x00\x12t\n\rRemoveInbound\x12/.xray.app.proxyman.command.RemoveInboundRequest\x1a\x30.xray.app.proxyman.command.RemoveInboundResponse\"\x00\x12q\n\x0c\x41lterInbound\x12..xray.app.proxyman.command.AlterInboundRequest\x1a/.xray.app.proxyman.command.AlterInboundResponse\"\x00\x12x\n\x0fGetInboundUsers\x12\x30.xray.app.proxyman.command.GetInboundUserRequest\x1a\x31.xray.app.proxyman.command.GetInboundUserResponse\"\x00\x12\x83\x01\n\x14GetInboundUsersCount\x12\x30.xray.app.proxyman.command.GetInboundUserRequest\x1a\x37.xray.app.proxyman.command.GetInboundUsersCountResponse\"\x00\x12n\n\x0b\x41\x64\x64Outbound\x12-.xray.app.proxyman.command.AddOutboundRequest\x1a..xray.app.proxyman.command.AddOutboundResponse\"\x00\x12w\n\x0eRemoveOutbound\x12\x30.xray.app.proxyman.command.RemoveOutboundRequest\x1a\x31.xray.app.proxyman.command.RemoveOutboundResponse\"\x00\x12t\n\rAlterOutbound\x12/.xray.app.proxyman.command.AlterOutboundRequest\x1a\x30.xray.app.proxyman.command.AlterOutboundResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -113,19 +129,25 @@ if not _descriptor._USE_C_DESCRIPTORS:
     _globals['_ALTERINBOUNDREQUEST']._serialized_end = 533
     _globals['_ALTERINBOUNDRESPONSE']._serialized_start = 535
     _globals['_ALTERINBOUNDRESPONSE']._serialized_end = 557
-    _globals['_ADDOUTBOUNDREQUEST']._serialized_start = 559
-    _globals['_ADDOUTBOUNDREQUEST']._serialized_end = 631
-    _globals['_ADDOUTBOUNDRESPONSE']._serialized_start = 633
-    _globals['_ADDOUTBOUNDRESPONSE']._serialized_end = 654
-    _globals['_REMOVEOUTBOUNDREQUEST']._serialized_start = 656
-    _globals['_REMOVEOUTBOUNDREQUEST']._serialized_end = 692
-    _globals['_REMOVEOUTBOUNDRESPONSE']._serialized_start = 694
-    _globals['_REMOVEOUTBOUNDRESPONSE']._serialized_end = 718
-    _globals['_ALTEROUTBOUNDREQUEST']._serialized_start = 720
-    _globals['_ALTEROUTBOUNDREQUEST']._serialized_end = 808
-    _globals['_ALTEROUTBOUNDRESPONSE']._serialized_start = 810
-    _globals['_ALTEROUTBOUNDRESPONSE']._serialized_end = 833
-    _globals['_CONFIG']._serialized_start = 835
-    _globals['_CONFIG']._serialized_end = 843
-    _globals['_HANDLERSERVICE']._serialized_start = 846
-    _globals['_HANDLERSERVICE']._serialized_end = 1555
+    _globals['_GETINBOUNDUSERREQUEST']._serialized_start = 559
+    _globals['_GETINBOUNDUSERREQUEST']._serialized_end = 610
+    _globals['_GETINBOUNDUSERRESPONSE']._serialized_start = 612
+    _globals['_GETINBOUNDUSERRESPONSE']._serialized_end = 679
+    _globals['_GETINBOUNDUSERSCOUNTRESPONSE']._serialized_start = 681
+    _globals['_GETINBOUNDUSERSCOUNTRESPONSE']._serialized_end = 726
+    _globals['_ADDOUTBOUNDREQUEST']._serialized_start = 728
+    _globals['_ADDOUTBOUNDREQUEST']._serialized_end = 800
+    _globals['_ADDOUTBOUNDRESPONSE']._serialized_start = 802
+    _globals['_ADDOUTBOUNDRESPONSE']._serialized_end = 823
+    _globals['_REMOVEOUTBOUNDREQUEST']._serialized_start = 825
+    _globals['_REMOVEOUTBOUNDREQUEST']._serialized_end = 861
+    _globals['_REMOVEOUTBOUNDRESPONSE']._serialized_start = 863
+    _globals['_REMOVEOUTBOUNDRESPONSE']._serialized_end = 887
+    _globals['_ALTEROUTBOUNDREQUEST']._serialized_start = 889
+    _globals['_ALTEROUTBOUNDREQUEST']._serialized_end = 977
+    _globals['_ALTEROUTBOUNDRESPONSE']._serialized_start = 979
+    _globals['_ALTEROUTBOUNDRESPONSE']._serialized_end = 1002
+    _globals['_CONFIG']._serialized_start = 1004
+    _globals['_CONFIG']._serialized_end = 1012
+    _globals['_HANDLERSERVICE']._serialized_start = 1015
+    _globals['_HANDLERSERVICE']._serialized_end = 1980

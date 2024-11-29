@@ -8,10 +8,10 @@ repository = "https://github.com/Acer-Platanoides/xcapi"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 grpcio = "^1.66.2"
 grpcio-tools = "^1.66.2"
-pydantic = "^2.9.2"
+pydantic = "^2.10.2"
 
 
 [build-system]

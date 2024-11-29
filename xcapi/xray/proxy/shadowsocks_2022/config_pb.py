@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from xcapi.model import ClassMeta
 from xcapi.xray.common.net.network_pb import Network
 from xcapi.xray.common.net.address_pb import IPOrDomain
+from xcapi.xray.common.protocol.user_pb import User
 
 
 @dataclass
@@ -24,10 +25,8 @@ class ServerConfig(ClassMeta):
 
 
 @dataclass
-class User(ClassMeta):
+class Account(ClassMeta):
     key: Optional[str] = None
-    email: Optional[str] = None
-    level: Optional[int] = None
 
 
 @dataclass
@@ -68,22 +67,22 @@ class ClientConfig(ClassMeta):
 _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n.xcapi/xray/proxy/shadowsocks_2022/config.proto\x12\x1bxray.proxy.shadowsocks_2022\x1a#xcapi/xray/common/net/network.proto\x1a#xcapi/xray/common/net/address.proto\"t\n\x0cServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\x05\x12)\n\x07network\x18\x05 \x03(\x0e\x32\x18.xray.common.net.Network\"\x91\x01\n\x15MultiUserServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x30\n\x05users\x18\x03 \x03(\x0b\x32!.xray.proxy.shadowsocks_2022.User\x12)\n\x07network\x18\x04 \x03(\x0e\x32\x18.xray.common.net.Network\"y\n\x10RelayDestination\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x07\x61\x64\x64ress\x18\x02 \x01(\x0b\x32\x1b.xray.common.net.IPOrDomain\x12\x0c\n\x04port\x18\x03 \x01(\r\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\r\n\x05level\x18\x05 \x01(\x05\"\xa0\x01\n\x11RelayServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x43\n\x0c\x64\x65stinations\x18\x03 \x03(\x0b\x32-.xray.proxy.shadowsocks_2022.RelayDestination\x12)\n\x07network\x18\x04 \x03(\x0e\x32\x18.xray.common.net.Network\"1\n\x04User\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\r\n\x05level\x18\x03 \x01(\x05\"\x9b\x01\n\x0c\x43lientConfig\x12,\n\x07\x61\x64\x64ress\x18\x01 \x01(\x0b\x32\x1b.xray.common.net.IPOrDomain\x12\x0c\n\x04port\x18\x02 \x01(\r\x12\x0e\n\x06method\x18\x03 \x01(\t\x12\x0b\n\x03key\x18\x04 \x01(\t\x12\x14\n\x0cudp_over_tcp\x18\x05 \x01(\x08\x12\x1c\n\x14udp_over_tcp_version\x18\x06 \x01(\rb\x06proto3')
+    b'\n.xcapi/xray/proxy/shadowsocks_2022/config.proto\x12\x1bxray.proxy.shadowsocks_2022\x1a#xcapi/xray/common/net/network.proto\x1a#xcapi/xray/common/net/address.proto\x1a%xcapi/xray/common/protocol/user.proto\"t\n\x0cServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\x05\x12)\n\x07network\x18\x05 \x03(\x0e\x32\x18.xray.common.net.Network\"\x8a\x01\n\x15MultiUserServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12)\n\x05users\x18\x03 \x03(\x0b\x32\x1a.xray.common.protocol.User\x12)\n\x07network\x18\x04 \x03(\x0e\x32\x18.xray.common.net.Network\"y\n\x10RelayDestination\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x07\x61\x64\x64ress\x18\x02 \x01(\x0b\x32\x1b.xray.common.net.IPOrDomain\x12\x0c\n\x04port\x18\x03 \x01(\r\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\r\n\x05level\x18\x05 \x01(\x05\"\xa0\x01\n\x11RelayServerConfig\x12\x0e\n\x06method\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x43\n\x0c\x64\x65stinations\x18\x03 \x03(\x0b\x32-.xray.proxy.shadowsocks_2022.RelayDestination\x12)\n\x07network\x18\x04 \x03(\x0e\x32\x18.xray.common.net.Network\"\x16\n\x07\x41\x63\x63ount\x12\x0b\n\x03key\x18\x01 \x01(\t\"\x9b\x01\n\x0c\x43lientConfig\x12,\n\x07\x61\x64\x64ress\x18\x01 \x01(\x0b\x32\x1b.xray.common.net.IPOrDomain\x12\x0c\n\x04port\x18\x02 \x01(\r\x12\x0e\n\x06method\x18\x03 \x01(\t\x12\x0b\n\x03key\x18\x04 \x01(\t\x12\x14\n\x0cudp_over_tcp\x18\x05 \x01(\x08\x12\x1c\n\x14udp_over_tcp_version\x18\x06 \x01(\rb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'xcapi.xray.proxy.shadowsocks_2022.config_pb', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
     DESCRIPTOR._loaded_options = None
-    _globals['_SERVERCONFIG']._serialized_start = 153
-    _globals['_SERVERCONFIG']._serialized_end = 269
-    _globals['_MULTIUSERSERVERCONFIG']._serialized_start = 272
-    _globals['_MULTIUSERSERVERCONFIG']._serialized_end = 417
-    _globals['_RELAYDESTINATION']._serialized_start = 419
-    _globals['_RELAYDESTINATION']._serialized_end = 540
-    _globals['_RELAYSERVERCONFIG']._serialized_start = 543
-    _globals['_RELAYSERVERCONFIG']._serialized_end = 703
-    _globals['_USER']._serialized_start = 705
-    _globals['_USER']._serialized_end = 754
-    _globals['_CLIENTCONFIG']._serialized_start = 757
-    _globals['_CLIENTCONFIG']._serialized_end = 912
+    _globals['_SERVERCONFIG']._serialized_start = 192
+    _globals['_SERVERCONFIG']._serialized_end = 308
+    _globals['_MULTIUSERSERVERCONFIG']._serialized_start = 311
+    _globals['_MULTIUSERSERVERCONFIG']._serialized_end = 449
+    _globals['_RELAYDESTINATION']._serialized_start = 451
+    _globals['_RELAYDESTINATION']._serialized_end = 572
+    _globals['_RELAYSERVERCONFIG']._serialized_start = 575
+    _globals['_RELAYSERVERCONFIG']._serialized_end = 735
+    _globals['_ACCOUNT']._serialized_start = 737
+    _globals['_ACCOUNT']._serialized_end = 759
+    _globals['_CLIENTCONFIG']._serialized_start = 762
+    _globals['_CLIENTCONFIG']._serialized_end = 917

@@ -17,6 +17,11 @@ class StatsServiceStub(object):
             request_serializer=command_pb.GetStatsRequest.SerializeToString,
             response_deserializer=command_pb.GetStatsResponse.FromString,
             _registered_method=True)
+        self.GetStatsOnline = channel.unary_unary(
+            '/xray.app.stats.command.StatsService/GetStatsOnline',
+            request_serializer=command_pb.GetStatsRequest.SerializeToString,
+            response_deserializer=command_pb.GetStatsResponse.FromString,
+            _registered_method=True)
         self.QueryStats = channel.unary_unary(
             '/xray.app.stats.command.StatsService/QueryStats',
             request_serializer=command_pb.QueryStatsRequest.SerializeToString,

@@ -4,6 +4,7 @@ package xray.proxy.shadowsocks_2022;
 
 import "xcapi/xray/common/net/network.proto";
 import "xcapi/xray/common/net/address.proto";
+import "xcapi/xray/common/protocol/user.proto";
 
 message ServerConfig {
   string method = 1;
@@ -16,7 +17,7 @@ message ServerConfig {
 message MultiUserServerConfig {
   string method = 1;
   string key = 2;
-  repeated User users = 3;
+  repeated xray.common.protocol.User users = 3;
   repeated xray.common.net.Network network = 4;
 }
 
@@ -35,10 +36,8 @@ message RelayServerConfig {
   repeated xray.common.net.Network network = 4;
 }
 
-message User {
+message Account {
   string key = 1;
-  string email = 2;
-  int32 level = 3;
 }
 
 message ClientConfig {

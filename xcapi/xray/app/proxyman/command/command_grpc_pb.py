@@ -27,6 +27,16 @@ class HandlerServiceStub(object):
             request_serializer=command_pb.AlterInboundRequest.SerializeToString,
             response_deserializer=command_pb.AlterInboundResponse.FromString,
             _registered_method=True)
+        self.GetInboundUsers = channel.unary_unary(
+            '/xray.app.proxyman.command.HandlerService/GetInboundUsers',
+            request_serializer=command_pb.GetInboundUserRequest.SerializeToString,
+            response_deserializer=command_pb.GetInboundUserResponse.FromString,
+            _registered_method=True)
+        self.GetInboundUsersCount = channel.unary_unary(
+            '/xray.app.proxyman.command.HandlerService/GetInboundUsersCount',
+            request_serializer=command_pb.GetInboundUserRequest.SerializeToString,
+            response_deserializer=command_pb.GetInboundUsersCountResponse.FromString,
+            _registered_method=True)
         self.AddOutbound = channel.unary_unary(
             '/xray.app.proxyman.command.HandlerService/AddOutbound',
             request_serializer=command_pb.AddOutboundRequest.SerializeToString,
