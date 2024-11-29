@@ -15,6 +15,8 @@ message Config {
   Multiplexing xmux = 9;
   xray.transport.internet.StreamConfig downloadSettings = 10;
   string mode = 11;
+  bool noGRPCHeader = 12;
+  int64 keepAlivePeriod = 13;
 }
 
 message RandRangeConfig {
