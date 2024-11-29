@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xcapi"
-version = "24.10.31"
+version = "24.11.5"
 description = "Python library for communicating with the xray grpc api"
 authors = ["AcerPlatanoides.L <AcerPlatanoides.L@proton.me>"]
 license = "MIT"

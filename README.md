@@ -6,7 +6,7 @@ Python library for communicating with the xray core grpc api
 
 Follow xray core version updates
 
-Use python 3.12
+Use python 3.9(24.11.5 ~ Now)
 
 ## Install
 ```bash
