@@ -56,7 +56,11 @@ class ConnectionReuse(ClassMeta):
 
 @dataclass
 class EncryptionSeed(ClassMeta):
-    """Maximum Transmission Unit, in bytes."""
+    """
+    Pre-shared secret between client and server. It is used for traffic obfuscation.
+    Note that if seed is absent in the config, the traffic will still be obfuscated,
+    but by a predefined algorithm.
+    """
     seed: Optional[str] = None
 
 

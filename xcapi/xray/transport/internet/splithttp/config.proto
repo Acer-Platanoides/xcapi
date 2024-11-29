@@ -14,6 +14,7 @@ message Config {
   RandRangeConfig xPaddingBytes = 8;
   Multiplexing xmux = 9;
   xray.transport.internet.StreamConfig downloadSettings = 10;
+  string mode = 11;
 }
 
 message RandRangeConfig {

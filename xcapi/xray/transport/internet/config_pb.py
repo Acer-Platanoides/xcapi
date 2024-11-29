@@ -32,9 +32,9 @@ class DomainStrategy(Enum):
 @dataclass
 class TransportConfig(ClassMeta):
     protocol_name: Optional[str] = None
-    """Type of network that this settings supports."""
+    """Transport protocol name."""
     settings: Optional[TypedMessage] = None
-    """Specific settings. Must be of the transports."""
+    """Specific transport protocol settings."""
 
 
 @dataclass
@@ -99,7 +99,7 @@ class StreamConfig(ClassMeta):
     security_type: Optional[str] = None
     """Type of security. Must be a message name of the settings proto."""
     security_settings: Optional[List[TypedMessage]] = None
-    """Settings for transport security. For now the only choice is TLS."""
+    """Transport security settings. They can be either TLS or REALITY"""
     socket_settings: Optional[SocketConfig] = None
 
 
